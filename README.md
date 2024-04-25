@@ -73,9 +73,9 @@ After performing a descriptive analysis of the data some features were dropped o
 3. **Created Features**:  
  - 'Region', an amalgamation of U.S. States according to the  [U.S. Bureau of Economic Analysis](https://www.bea.gov/).
  - 'Age_years', the age of the cardholder based on the difference between today's date and the cardholder's DOB.
- - 'Distance_km', the distance between the cardholder's latitude and longitude and the merchant's latitu3e and longitude.
-4. **Encoding Features with few categories**: binary or get_dummies encoding was used to encode categories: 'gender' and 'region'; features with fewer4than 20 members.
-6. **Transformed Features**: 'amt' (Transaction Amount) due to the very high dispersion in this feature it was transformed by the natural log.  
+ - 'Distance_km', the distance between the cardholder's latitude and longitude and the merchant's latitude and longitude.
+4. **Encoding Features with few categories**: binary or get_dummies encoding was used to encode categories: 'gender' and 'region'; features with fewer than 20 members.
+6. **Transformed Features**: 'amt' (Transaction Amount), due to the very high dispersion in this feature it was transformed by the natural log.  
 ![original amt distribution](img/amount.png)
 ![amt transformed to a log distribution](img/amount_log.png)
 
@@ -89,7 +89,7 @@ After performing a descriptive analysis of the data some features were dropped o
 ![Distribution of Negative y](img/Distribution_of_y_neg.png)
 
 6. **Encoding Features with Extensive Categories**: Target encoding was used to encode the 'merchants', and 'jobs' features.  It was applied after splitting the data into train and test sets.  The target encoder was fit to the training data, the resulting encoder was used to transform both the training and testing sets.
-7. **Scaling**: Sci-kit Learns standard scaler was fit to the training features, and the training and testing features were transformed with the reng scaler.   
+7. **Scaling**: Sci-kit Learns standard scaler was fit to the training features, and the training and testing features were transformed with the resulting scaler.   
 ___
 
 ___
