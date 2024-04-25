@@ -17,8 +17,8 @@ def gen_cm_cr(modelName, y_test, y_pred):
     bal_acc_score = balanced_accuracy_score(y_test, y_pred)
     print("Confusion Matrix: " + modelName)
     display(cm_df)
-    print(f"Accuracy Score : {acc_score}")
-    print(f"Balanced Accuracy Score: {bal_acc_score}")
+    print(f"Accuracy Score : {round(acc_score,4)}")
+    print(f"Balanced Accuracy Score: {round(bal_acc_score,4)}")
     print("Classification Report")
     print(classification_report(y_test, y_pred))
 
