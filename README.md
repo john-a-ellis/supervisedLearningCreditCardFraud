@@ -1,4 +1,4 @@
-# Supervised Machine Learning Model Evaluation and Selection - Credit Card Fraud Detection
+# Supervised Machine Learning Model Evaluation and Selection for Credit Card Fraud Detection
 Dataset located on: 
 [Kaggle](https://www.kaggle.com/datasets/kelvinkelue/credit-card-fraud-prediction)  
 To run the notebooks supporting this analysis the Fraud_test.csv file must be placed in a folder called 'Resources' directly below the folder containing the notebooks.  
@@ -53,8 +53,8 @@ Given that our dataset has, on average, only 1 fraudulent transaction for every 
 
 Balanced accuracy accounts for the class imbalance by considering both positive and negative predictions. It is calculated as the average of two ratios:
 
-The correctly predicted fraudulent transactions divided by all fraudulent transactions (cpf/af).
-The correctly predicted non-fraudulent transactions divided by all non-fraudulent transactions (cpnf/anf).
+The correctly predicted fraudulent transactions are divided by all fraudulent transactions (cpf/af).
+The correctly predicted non-fraudulent transactions are divided by all non-fraudulent transactions (cpnf/anf).
 Mathematically:
 
 Balanced Accuracy = (cpf/af + cpnf/anf) / 2
@@ -79,19 +79,17 @@ After performing a descriptive analysis of the data some features were dropped o
 ![original amt distribution](img/amount.png)
 ![amt transformed to a log distribution](img/amount_log.png)
 
-7. **Spliting into Training and Testing Sets**: The resulting data set was split into training and testing sets with 75% of the data used for training and 25% was used for testing.  Due to the very high imbalance in target labels (classes) the training and test splits were reviewed to ensure an adequate number of labels were assigned to each set.    
-                `Average class probability in the data set: 0.003860`  
-                `Average class probability in training set: 0.003839`  
-                `Average class probability in test se5:     0.003923`
+7. **Spliting into Training and Testing Sets**: The resulting data set was split into training and testing sets with 75% of the data used for training and 25% was used for testing.  Due to the very high imbalance in target labels (classes), the training and test splits were reviewed to ensure an adequate number of labels were assigned to each set.    
+                `Average class probability in the data set:     0.003860`  
+                `Average class probability in the training set: 0.003839`  
+                `Average class probability in the test set:     0.003923`
 
 8. The distribution of the y_postive and y_negative labels were reviewed.  
 ![Distribution of Positive y](img/Distribution_of_y_pos.png)
 ![Distribution of Negative y](img/Distribution_of_y_neg.png)
 
 6. **Encoding Features with Extensive Categories**: Target encoding was used to encode the 'merchants', and 'jobs' features.  It was applied after splitting the data into train and test sets.  The target encoder was fit to the training data, the resulting encoder was used to transform both the training and testing sets.
-7. **Scaling**: Sci-kit Learns standard scaler was fit to the training features, and the training and testing features were transformed with the resulting scaler.   
-___
-
+7. **Scaling**: Sci-kit Learns standard scaler was fit to the training features, and the training and testing features were transformed with the resulting scaler. 
 ___
 ## Part 4 Assessing various machine learning algorithms.
 The following models were reviewed for their ability to achieve a balanced accuracy score while maximizing the recall of the model.
@@ -176,9 +174,9 @@ The random forest classifier generated the following feature importance which sh
 `weighted avg       1.00      0.99      1.00    138930`  
 
 
-The XGBoost model with its ability to accept a 'scale_pos_weight' parameter helps compensate for the class imbalance in the target variable.  As a result, it performs much better than the other algorithms considered.  The parameter [2](Footnotes:)'scale_pos_weights' is set to the ratio of negative transactions to positive transactions. (sum(negative_y)/sum(positive_y)) or 259.0 which when applied removes the imbalance in the target label during model fitting.
+The XGBoost model with its ability to accept a 'scale_pos_weight' parameter helps compensate for the class imbalance in the target variable.  As a result, it performs much better at detecting fraudulent transactions than the other algorithms considered.  The parameter [2](Footnotes:)'scale_pos_weights' is set to the ratio of negative transactions to positive transactions. (sum(negative_y)/sum(positive_y)) or 259.0 which when applied removes the imbalance in the target label during model fitting.
 
-Note robustness of the XGBoost algorithm is evident when reviewing the relative importance of the features applied.  XGBoost is able to reduce the impact of a feature to 0 or nearly 0 which can assist the scientist with feature engineering.
+Note robustness of the XGBoost algorithm is evident when reviewing the relative importance of the features applied.  XGBoost can reduce the impact of a feature to zero or nearly zero which can assist the scientist with feature engineering.
 
 ![XGBoost Classifier Base Model Feature Importance](img/XGB_base_importances.png)
 ## Part 5 Algorithm Selection
@@ -196,7 +194,7 @@ The parameters selected to be tuned were:
 The results were as follows:
 1. From the 30 models run by the tuner, 6 (20%) of the models met the primary requirement of meeting 0.965 balanced accuracy.
 2. From the 6 models 3 (50%) met the requirement of being within 1 standard deviation of the model with the highest precision.
-3. Of these 3 models the one with which rendered the fastest prediction was selected as the **BEST** model.  
+3. Of these 3 models, the one that rendered the fastest prediction was selected as the **BEST** model.  
 
 The tuning objective was set to maximize the balance accuracy score and secondarily improve model precision.  Precision was chosen in an attempt to minimize the rate of false positives. 
 
@@ -216,14 +214,16 @@ The tuning objective was set to maximize the balance accuracy score and secondar
 `   macro avg       0.58      0.98      0.63    138930`  
 `weighted avg       1.00      0.98      0.99    138930`  
 
-XGBoost with its robust ability to apply L1 regularization
+The tuned model exhibited significant improvement in balanced accuracy (0.03) when evaluated against the test dataset, surpassing the base XGBoost model. Notably, it demonstrated heightened sensitivity to fraudulent transactions compared to all other reviewed models. However, this performance gain came at the cost of precision: 84% of the predicted fraudulent transactions were false positives, representing a 22% increase from the base model. Importantly, this translated to only 2% of legitimate transactions being incorrectly flagged as fraudulent.
 
 ![XGBoost Classifer BEST Model Feature Importance](img/XGB_best_importances.png)
 
 ## Comparative Feature Importance by Model
-In our review of ensemble models, one consistent finding is that the log_amount of the transaction stands out as the most significant feature across all models. However, beyond this consistency, the importance of other features varies significantly from model to model. Notably, both the XGBoost Base Model and the XGBoost BEST model share several features that rank high in importance. To explore further, we could consider excluding some of the less significant features from the XGBoost BEST Model and assess whether this refinement leads to improved performance..
-
+In our review of ensemble models, one consistent finding is that the log_amount of the transaction stands out as the most significant feature across all models. However, beyond this consistency, the importance of other features varies significantly from model to model. Notably, both the XGBoost Base Model and the XGBoost BEST model share several features that rank high in importance. To explore further, we could consider excluding some of the less significant features from the XGBoost BEST Model and assess whether this refinement leads to improved performance.  
 ![Comparative Feature Importance by Model](img/Comparative_Importance.png)
+## Final Conclusions
+XGBoost, with its capability to adjust the weight of the positive target coupled with using balanced accuracy as the objective performance metric, serves as an effective framework for building binary classification models. This framework is particularly well-suited for classifying datasets with highly imbalanced target classes.”
+
 ___
 ### Footnotes:
 [1]
