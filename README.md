@@ -221,7 +221,7 @@ XGBoost with its robust ability to apply L1 regularization
 ![XGBoost Classifer BEST Model Feature Importance](img/XGB_best_importances.png)
 
 ## Comparative Feature Importance by Model
-One constant when reviewing the ensemble models is the log_amount of the transaction is the most significant feature in each model.  Beyond that, the importance of the features differs significantly from model to model. The XGBoost Base Model and XGBoost BEST model share several features in common when ranked by importance. An opportunity for further analysis may be to remove some of the least significant features from model consideration in the XGBoost best Model and see if the performance improves.
+In our review of ensemble models, one consistent finding is that the log_amount of the transaction stands out as the most significant feature across all models. However, beyond this consistency, the importance of other features varies significantly from model to model. Notably, both the XGBoost Base Model and the XGBoost BEST model share several features that rank high in importance. To explore further, we could consider excluding some of the less significant features from the XGBoost BEST Model and assess whether this refinement leads to improved performance..
 
 ![Comparative Feature Importance by Model](img/Comparative_Importance.png)
 ___
