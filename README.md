@@ -1,4 +1,4 @@
-# Supervised Learning Machine Learning Model Evaluation and Selection - Credit Card Fraud Detection
+# Supervised Machine Learning Model Evaluation and Selection - Credit Card Fraud Detection
 Dataset located on: 
 [Kaggle](https://www.kaggle.com/datasets/kelvinkelue/credit-card-fraud-prediction)  
 To run the notebooks supporting this analysis the Fraud_test.csv file must be placed in a folder called 'Resources' directly below the folder containing the notebooks.  
