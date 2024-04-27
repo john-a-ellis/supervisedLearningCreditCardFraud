@@ -1,7 +1,7 @@
 # Supervised Machine Learning Model Evaluation and Selection for Credit Card Fraud Detection
 Dataset located on: 
 [Kaggle](https://www.kaggle.com/datasets/kelvinkelue/credit-card-fraud-prediction)  
-To run the notebooks supporting this analysis the Fraud_test.csv file must be placed in a folder called 'Resources' directly below the folder containing the notebooks.  
+To run the notebooks supporting this analysis the Fraud_test.csv file must be placed in a folder called 'Resources' directly below the folder containing the notebook.  
 
 ## An Overview and purpose:  
 To evaluate a variety of machine learning algorithms and their ability to correctly identify fraudulent transactions within a population of transactions.  The binary classification machine learning models will be evaluated using a labeled dataset consisting of 22 features.
@@ -242,4 +242,4 @@ The following data science and visualization technologies were used in creating 
 ![https://xgboost.readthedocs.io/en/stable/#](https://raw.githubusercontent.com/dmlc/dmlc.github.io/master/img/logo-m/xgboost.png)  
 ![https://pandas.pydata.org/](https://pandas.pydata.org/static/img/pandas_secondary.svg)  
 ![https://plotly.com/python/plotly-express/#overview](https://plotly.com/all_static/images/graphing_library_dark.svg)  
-![https://matplotlib.org/stable/](https://matplotlib.org/stable/_static/logo_light.svg)  
+
